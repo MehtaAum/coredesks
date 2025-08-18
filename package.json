@@ -11,13 +11,9 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",
-<<<<<<< HEAD
-    "react": "^19.1.1",
-=======
     "chart.js": "^4.5.0",
     "react": "^19.1.1",
     "react-chartjs-2": "^5.3.0",
->>>>>>> 7aeb759 (dashboard added (building stage))
     "react-dom": "^19.1.1",
     "tailwindcss": "^4.1.12"
   },
