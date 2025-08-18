@@ -17,6 +17,11 @@ box-shadow: rgba(241, 240, 240, 0.308) 0px 1px 3px 0px, rgba(27, 31, 35, 0.699) 
   box-shadow: rgba(241, 240, 240, 0.308) 1px 0px 0px 0px,
               rgba(27, 31, 35, 0.699) 0px 0px 0px 0px;
 }
+@media (max-width:1024px){
+  .logo-div{
+    box-shadow:none;
+  }
+}
 
 .data-panel {
   box-shadow: rgba(141, 141, 141, 0.164) 0px 6px 24px 0px, 
@@ -39,3 +44,37 @@ box-shadow: rgba(241, 240, 240, 0.308) 0px 1px 3px 0px, rgba(27, 31, 35, 0.699) 
                 rgba(121, 121, 121, 0.274) 0px 0px 0px 1px;
   }
 }
+
+/* scrollbar */
+
+.view-panel , .to-do {
+  --sb-track-color: #000000;
+  --sb-thumb-color: #585858;
+  --sb-size: 1px;
+}
+
+.view-panel::-webkit-scrollbar ,
+.to-do::-webkit-scrollbar{
+  width: var(--sb-size)
+}
+
+.view-panel::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 7px;
+
+}
+
+.view-panel::-webkit-scrollbar-thumb ,
+.to-do::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 7px;
+  
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .view-panel , .to-do{
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}
+/* scrollbar */

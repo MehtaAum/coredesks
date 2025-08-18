@@ -1,18 +1,16 @@
 import DashboardPanel from "../reuse/DashboardPanel.jsx"
-import Navbar from "../reuse/Navbar.jsx"
-import Panel from "./Panel.jsx"
+import Home from "./Home.jsx"
 
 const Dashboard = () => {
   return (
-    <div className="bg-[#0a0a0a] w-full h-[100vh]">
-      <Navbar></Navbar>
-      <Panel></Panel>
+        <div>
+              <Home></Home>
 
-      <div className="view-panel w-[82.6%] h-[92vh] fixed right-[0.1%] bottom-2 border border-white p-3">
-        <DashboardPanel></DashboardPanel>
-      </div>
+               <div className="view-panel w-full lg:w-[82.6%] h-[92vh] fixed right-[0.1%] border border-white bottom-2 p-3 overflow-y-scroll">
+                    <DashboardPanel></DashboardPanel>
+               </div>
+        </div>
 
-    </div>
   )
 }
 

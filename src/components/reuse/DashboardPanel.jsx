@@ -1,24 +1,9 @@
 import { Line, Doughnut } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  ArcElement,
-  Tooltip,
-  Legend,
-} from "chart.js";
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Tooltip, Legend,} from "chart.js";
+import TodoList from "./TodoList";
 
 // register chart.js components
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  ArcElement,
-  Tooltip,
-  Legend
+ChartJS.register( CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Tooltip, Legend
 );
 
 const DashboardPanel = () => {
@@ -72,7 +57,7 @@ const DashboardPanel = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 flex flex-col">
 
           <div className="dash-1 flex justify-center gap-6 mb-8">
             {stats.map((stat, index) => (
@@ -106,14 +91,18 @@ const DashboardPanel = () => {
             ))}
           </div>
 
+          <div className="two-dash flex gap-9">
+                    <div className="dash-2 w-[74.40%] py-[30px] flex justify-center items-center flex-col h-[55vh] data-panel bg-[#171717] rounded-3xl p-6">
+                      <h2 className="text-gray-300 text-lg text-center mb-4">Revenue vs Expense vs Profit</h2>
+                      <Doughnut data={doughnutData} options={doughnutOptions} />
+                    </div>
 
-          <div className="dash-2 w-[74.40%] py-[30px] flex justify-center items-center flex-col h-[55vh] data-panel bg-[#171717] rounded-3xl p-6">
-            <h2 className="text-gray-300 text-lg text-center mb-4">Revenue vs Expense vs Profit</h2>
-            <Doughnut data={doughnutData} options={doughnutOptions} />
+
+                    <div className="dash-3">
+                          <TodoList></TodoList>
+                    </div>
           </div>
 
-
-          <div className="dash-3"></div>
 
     </div>
   );
