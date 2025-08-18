@@ -1,13 +1,19 @@
+import { useContext } from "react";
+import { toggleValue } from "../pages/Home"
 
 const Navbar = () => {
 
-  let handleHam = () => {
-    //building stage
+  const {isOpen,setIsOpen} = useContext(toggleValue)
+
+  let handleHam = (e) => {
+    setIsOpen(!isOpen)
+     console.log();
+     
   }
 
   return (
     <div>
-      <div className="navbar w-full h-[60px] fixed bg-[#171717] flex justify-between items-center px-[3%] z-30">
+      <div className="navbar w-full h-[60px] fixed bg-[#171717] flex justify-between items-center px-[3%] z-50">
         
         <div className="flex h-full  items-center gap-5  lg:gap-0">
 

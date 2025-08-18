@@ -4,8 +4,12 @@ import Income from "./Income";
 import Expenses from "./Expenses";
 import Employees from "./Employees";
 import Report from "./Report";
+import { useContext } from "react";
+import { toggleValue } from "./Home";
 
 const Panel = () => {
+
+  const {isOpen} = useContext(toggleValue)
 
   const location = useLocation()  //give current url path
 
@@ -65,7 +69,7 @@ const Panel = () => {
 
   return (
     <div>
-      <div className="panel text-white w-[17%] h-[100vh] hidden lg:flex flex-col fixed left-0  bg-[#171717] p-6 pt-20 gap-2">
+      <div className={`panel text-white w-[59%] sm:w-[35%] md:w-[29%] lg:w-[17%] h-[100vh] flex flex-col fixed left-0  bg-[#171717] p-6 pt-20 gap-2 duration-[0.3s] transform ${isOpen ? "translate-x-0" : "-translate-x-full"} z-20 lg:translate-x-0`}>
 
         {items.map((item, index) => (
           <Link to={item.path} key={index} className={`p-2 px-5 rounded-3xl cursor-pointer hover:scale-[1.01] duration-[0.2s] flex items-center gap-2

@@ -57,54 +57,57 @@ const DashboardPanel = () => {
   };
 
   return (
-    <div className="p-6 flex flex-col">
+<div className="p-6 flex flex-col">
 
-          <div className="dash-1 flex justify-center gap-6 mb-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="data-panel w-[25%] min-w-[220px] h-[26vh] bg-[#171717] rounded-3xl flex flex-col justify-between p-4">
-                <div>
-                  <h2 className="text-gray-300 text-lg">{stat.label}</h2>
-                  <p className="text-white text-2xl font-bold mt-2">{stat.value}</p>
-                </div>
+  <div className="dash-1 flex flex-wrap justify-center gap-8 mb-8">
+    {stats.map((stat, index) => (
+      <div
+        key={index}
+        className=" data-panel bg-[#171717] rounded-3xl p-4 flex flex-col justify-between w-full sm:w-[47%] xl:w-[23%] min-w-[200px] h-[26vh]">
+        <div>
+          <h2 className="text-gray-300 text-lg">{stat.label}</h2>
+          <p className="text-white text-2xl font-bold mt-2">{stat.value}</p>
+        </div>
 
-                <div className="w-full h-[50%]">
-                  <Line
-                    data={{
-                      labels: ["Jan", "Feb", "Mar", "Apr", "May"],
-                      datasets: [
-                        {
-                          data: stat.data,
-                          borderColor: stat.color,
-                          backgroundColor: "transparent",
-                          tension: 0.4,
-                        },
-                      ],
-                    }}
-                    options={{
-                      responsive: true,
-                      plugins: { legend: { display: false } },
-                      scales: { x: { display: false }, y: { display: false } },
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="w-full h-[50%]">
+          <Line
+            data={{
+              labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+              datasets: [
+                {
+                  data: stat.data,
+                  borderColor: stat.color,
+                  backgroundColor: "transparent",
+                  tension: 0.4,
+                },
+              ],
+            }}
+            options={{
+              responsive: true,
+              plugins: { legend: { display: false } },
+              scales: { x: { display: false }, y: { display: false } },
+            }}
+          />
+        </div>
+      </div>
+    ))}
+  </div>
 
-          <div className="two-dash flex gap-9">
-                    <div className="dash-2 w-[74.40%] py-[30px] flex justify-center items-center flex-col h-[55vh] data-panel bg-[#171717] rounded-3xl p-6">
-                      <h2 className="text-gray-300 text-lg text-center mb-4">Revenue vs Expense vs Profit</h2>
-                      <Doughnut data={doughnutData} options={doughnutOptions} />
-                    </div>
-
-
-                    <div className="dash-3">
-                          <TodoList></TodoList>
-                    </div>
-          </div>
-
-
+  <div className="two-dash flex flex-col xl:flex-row gap-9">
+    
+    <div className="dash-2 data-panel bg-[#171717] rounded-3xl p-6 py-[30px] flex justify-center items-center flex-col
+                    w-full xl:w-[75%] h-[55vh]">
+      <h2 className="text-gray-300 text-lg text-center mb-4">Revenue vs Expense vs Profit</h2>
+      <Doughnut data={doughnutData} options={doughnutOptions} />
     </div>
+
+    <div className="dash-3 w-full xl:w-[25%]">
+      <TodoList />
+    </div>
+
+  </div>
+</div>
+
   );
 };
 

@@ -60,19 +60,19 @@ export default function TodoList() {
   }
 
   return (
-    <div className="data-panel to-do w-full max-w-md mx-auto max-h-[55vh] bg-[#171717] rounded-3xl shadow-lg overflow-y-scroll">
-      <div className="p-6">
+    <div className="data-panel to-do w-full mx-auto xl:max-h-[55vh] bg-[#171717] rounded-3xl shadow-lg xl:overflow-y-scroll ">
+      <div className="p-6 border flex flex-col">
         <h2 className="text-center text-white text-2xl font-bold mb-6">Todo List</h2>
 
         {/* Add new task */}
-        <div className="flex gap-2 mb-6">
+        <div className="flex gap-2 mb-6 flex-wrap justify-center items-center">
           <input
             type="text"
             placeholder="Add a new task..."
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
             onKeyPress={handleKeyPress}
-            className="flex-1 px-3 py-2 bg-[#242424] border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-[70%] p-2 bg-[#242424] border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
           />
           <button
             onClick={addTask}
@@ -84,14 +84,14 @@ export default function TodoList() {
         </div>
 
         {/* Todo list */}
-        <div className="space-y-2">
+        <div className="space-y-2 ">
           {todos.length === 0 ? (
             <p className="text-center text-gray-400 py-8">No tasks yet. Add one above!</p>
           ) : (
             todos.map((todo) => (
               <div
                 key={todo.id}
-                className={`flex items-center gap-3 p-3 border rounded-lg ${
+                className={`to-do-inside flex items-center gap-3 p-3 border overflow-x-scroll rounded-lg ${
                   todo.completed ? "bg-gray-800 opacity-75 border-gray-600" : "bg-gray-800 border-gray-600"
                 }`}
               >
@@ -111,7 +111,7 @@ export default function TodoList() {
                       value={editingText}
                       onChange={(e) => setEditingText(e.target.value)}
                       onKeyPress={handleEditKeyPress}
-                      className="w-full px-2 py-1 text-sm bg-gray-700 border border-gray-500 rounded text-white focus:outline-none focus:ring-1 focus:ring-green-500"
+                      className="w-full px-2 py-1 text-sm bg-gray-700 border border-gray-500  rounded text-white focus:outline-none focus:ring-1 focus:ring-green-500"
                       autoFocus
                     />
                   ) : (
@@ -122,7 +122,7 @@ export default function TodoList() {
                 </div>
 
                 {/* Action buttons */}
-                <div className="flex gap-1">
+                <div className="flex gap-1 ">
                   {editingId === todo.id ? (
                     <>
                       <button

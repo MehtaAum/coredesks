@@ -77,4 +77,33 @@ box-shadow: rgba(241, 240, 240, 0.308) 0px 1px 3px 0px, rgba(27, 31, 35, 0.699) 
                      var(--sb-track-color);
   }
 }
+
+.to-do-inside {
+  --sb-track-color: #000000;
+  --sb-thumb-color: #585858;
+  --sb-size: 4px;              /* you can change size if you want thinner */
+}
+
+/* Webkit browsers */
+.to-do-inside::-webkit-scrollbar {
+  height: var(--sb-size);       /* height instead of width (horizontal) */
+}
+
+.to-do-inside::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 7px;
+}
+
+.to-do-inside::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 7px;
+}
+
+/* Fallback for Firefox */
+@supports not selector(::-webkit-scrollbar) {
+  .to-do-inside {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    scrollbar-width: thin;
+  }
+}
 /* scrollbar */
