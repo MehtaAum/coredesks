@@ -1,14 +1,3 @@
-
-<<<<<<< HEAD
-function App() {
-  return (
-    <div>
-      
-    </div>
-  )
-}
-
-=======
 import Dashboard from "./components/pages/Dashboard"
 
 const App = () => {
@@ -18,5 +7,5 @@ const App = () => {
     </div>
   )
 }
->>>>>>> 7aeb759 (dashboard added (building stage))
+
 export default App
