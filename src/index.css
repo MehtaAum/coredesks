@@ -107,3 +107,13 @@ box-shadow: rgba(241, 240, 240, 0.308) 0px 1px 3px 0px, rgba(27, 31, 35, 0.699) 
   }
 }
 /* scrollbar */
+
+.input-form{
+  box-shadow: rgba(255, 255, 255, 0.02) 0px 1px 3px 0px, rgba(252, 253, 253, 0.637) 0px 0px 0px 1px;
+}
+
+/* make the calendar icon white (Chrome, Edge, Safari) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
