@@ -1,3 +1,3 @@
 
 #coredesks
-![Screenshot](./assets/cube-logo.png)
+![Screenshot](.src/assets/cube-logo.png)
