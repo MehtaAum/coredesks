@@ -31,8 +31,8 @@ Although it’s still in the **building stage**, the focus is on creating a clea
 | Technology | Description |
 |-----------|-------------|
 | **HTML + Tailwind CSS** | Frontend UI |
-| **JavaScript** | Frontend logic / interactivity |
-| **(To be decided)** | Backend (e.g. Firebase / Express / Node) |
+| **React** | Frontend logic / interactivity |
+| **(To be decided)** | Backend (e.g. Firebase) |
 
 ---
 
