@@ -1,9 +1,8 @@
-<table align="center">
-  <tr>
-    <td><img src="./src/assets/cube-logo.png" alt="Logo" width="50"/></td>
-    <td><h1 style="margin-left: 8px;">coredesks</h1></td>
-  </tr>
-</table>
+<div style="display:flex; align-items:center; justify-content:center;">
+  <img src="./src/assets/cube-logo.png" alt="Logo" width="50" />
+  <h1 style="margin-left:8px;">coredesks</h1>
+</div>
+
 
 ---
 
