@@ -1,6 +1,6 @@
-<span>
+<span style="display:flex; align-items:center;">
   <img src="./src/assets/cube-logo.png" alt="Logo" width="50" />
-  <span style="font-size : 20px">coredesks</span>
+  <span style="font-size:20px; margin-left:6px;">coredesks</span>
 </span>
 
 
