@@ -47,7 +47,7 @@ box-shadow: rgba(241, 240, 240, 0.308) 0px 1px 3px 0px, rgba(27, 31, 35, 0.699) 
 
 /* scrollbar */
 
-.view-panel , .to-do , .income-3 , .income-desc  {
+.view-panel , .to-do , .div-scroll , .income-desc  {
   --sb-track-color: #000000;
   --sb-thumb-color: #585858;
   --sb-size: 1px;
@@ -55,13 +55,13 @@ box-shadow: rgba(241, 240, 240, 0.308) 0px 1px 3px 0px, rgba(27, 31, 35, 0.699) 
 
 .view-panel::-webkit-scrollbar ,
 .to-do::-webkit-scrollbar ,
-.income-3::-webkit-scrollbar,
+.div-scroll::-webkit-scrollbar,
 .income-desc::-webkit-scrollbar{
   width: var(--sb-size)
 }
 
 .view-panel::-webkit-scrollbar-track ,
-.income-3::-webkit-scrollbar-track,
+.div-scroll::-webkit-scrollbar-track,
 .income-desc::-webkit-scrollbar-track{
   background: var(--sb-track-color);
   border-radius: 7px;
@@ -70,7 +70,7 @@ box-shadow: rgba(241, 240, 240, 0.308) 0px 1px 3px 0px, rgba(27, 31, 35, 0.699) 
 
 .view-panel::-webkit-scrollbar-thumb ,
 .to-do::-webkit-scrollbar-thumb ,
-.income-3::-webkit-scrollbar-thumb ,
+.div-scroll::-webkit-scrollbar-thumb ,
 .income-desc::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: 7px;
@@ -78,7 +78,7 @@ box-shadow: rgba(241, 240, 240, 0.308) 0px 1px 3px 0px, rgba(27, 31, 35, 0.699) 
 }
 
 @supports not selector(::-webkit-scrollbar) {
-  .view-panel , .to-do , .income-3 , .income-desc{
+  .view-panel , .to-do , .div-scroll , .income-desc{
     scrollbar-color: var(--sb-thumb-color)
                      var(--sb-track-color);
   }

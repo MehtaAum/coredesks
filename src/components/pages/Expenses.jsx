@@ -179,7 +179,7 @@ const Expenses = () => {
                               </form>
                         </div>
 
-                        <div className="income-3 my-5 lg:my-0 data-panel w-full lg:w-[43%] max-h-[67.4vh] bg-[#171717] rounded-3xl flex flex-col gap-4 text-white p-4 overflow-y-scroll">
+                        <div className="income-3 div-scroll my-5 lg:my-0 data-panel w-full lg:w-[43%] max-h-[67.4vh] bg-[#171717] rounded-3xl flex flex-col gap-4 text-white p-4 overflow-y-scroll">
                               <h2 className="text-gray-300 text-[18px]">Recent Expenses Entries</h2>
 
                                     {entries.map((item, index) => (
