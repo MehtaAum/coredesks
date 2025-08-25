@@ -1,5 +1,6 @@
 import Home from "./Home"
-import { useState } from "react";
+import { useState , useContext } from "react";
+import { EntriesContext } from "../reuse/EntriesContext";
 
 const Expenses = () => {
    //useState
@@ -8,8 +9,6 @@ const Expenses = () => {
 
       const [catOpen, setCatOpen] = useState(false);
       const [catSelected, setCatSelected] = useState("");
-
-      
 
       let [date , setDate] = useState("")
       let [amount , setAmount] = useState("")
@@ -21,7 +20,11 @@ const Expenses = () => {
             method: "",
             desc: ""
       })
-      let [entries , setEntries] = useState([]) 
+
+      let { entries, setEntries } = useContext(EntriesContext);
+      
+      // Filter entries to only show expenses
+      const expenseEntries = entries.filter(entry => entry.type === "expense");
    //useState
 
       const options = [
@@ -81,7 +84,8 @@ const Expenses = () => {
                   amount,
                   catSelected,
                   selected,
-                  desc
+                  desc,
+                  type: "expense" 
             }
 
             setEntries(entries => [newEntries,...entries])
@@ -94,10 +98,20 @@ const Expenses = () => {
       }
 
       let handleDelete = (index) => {
-            setEntries(
-                  prev => prev.filter((ele , i) => i !== index)
-            )
+
+            // Need to find the actual entry in the full entries array and remove it
             
+            const entryToDelete = expenseEntries[index];
+            const actualIndex = entries.findIndex(entry => 
+                entry.date === entryToDelete.date && 
+                entry.amount === entryToDelete.amount && 
+                entry.desc === entryToDelete.desc &&
+                entry.type === entryToDelete.type
+            );
+            
+            if (actualIndex !== -1) {
+                setEntries(prev => prev.filter((_, i) => i !== actualIndex));
+            }
       }
 
   return (
@@ -107,9 +121,11 @@ const Expenses = () => {
 
                   <div className="income-1 mt-3.5 sm:mt-0 data-panel w-full  bg-[#171717] rounded-3xl flex flex-col gap-2 text-white p-6">
                         <h2 className="text-gray-300 text-[29px]">Total Expenses</h2>
-                        <div className="text-[#ef000a] text-4xl break-words break-all whitespace-normal">₹{entries.reduce((store,current) => store + Number(current.amount), 0)
-                              .toLocaleString("en-IN" , {minimumFractionDigits : 2, maximumFractionDigits: 2})}</div>
-                        <div className="text-gray-300 text-[15px]">{entries.length} entries this period</div>
+                        <div className="text-[#ef000a] text-4xl break-words break-all whitespace-normal">
+                            ₹{expenseEntries.reduce((store,current) => store + Number(current.amount), 0)
+                              .toLocaleString("en-IN" , {minimumFractionDigits : 2, maximumFractionDigits: 2})}
+                        </div>
+                        <div className="text-gray-300 text-[15px]">{expenseEntries.length} entries this period</div>
                   </div>
 
                   <div className="income-2-3 lg:flex justify-between">
@@ -148,9 +164,7 @@ const Expenses = () => {
                                     </div>
                                     <div className="text-red-400">{error.cat}</div>
 
-
-
-                                     {/* payment method */}
+                  
                                     <label htmlFor="">Payment Method</label>
                                     <div className="relative w-full input-form outline-0 p-2 rounded-2xl bg-[#171717]">
                                           <div className="bg-[#171717] text-white p-2 rounded-2xl cursor-pointer select-none flex items-center justify-between" onClick={() => setIsOpen(!isOpen)}>
@@ -182,7 +196,7 @@ const Expenses = () => {
                         <div className="income-3 div-scroll my-5 lg:my-0 data-panel w-full lg:w-[43%] max-h-[67.4vh] bg-[#171717] rounded-3xl flex flex-col gap-4 text-white p-4 overflow-y-scroll">
                               <h2 className="text-gray-300 text-[18px]">Recent Expenses Entries</h2>
 
-                                    {entries.map((item, index) => (
+                                    {expenseEntries.map((item, index) => (
                                     <div key={index} className="p-2 flex flex-col gap-2 bg-[#3e3e3e] rounded-lg mt-1">
 
                                           <div className="amount-div flex justify-between items-center">
@@ -192,7 +206,7 @@ const Expenses = () => {
                                                       <span className="bg-[#5a5a5a] rounded-3xl py-0.5 px-2.5">{item.selected}</span>
                                                 </div>
 
-                                                <svg className="entries-delete h-5 w-5 text-red-500 cursor-pointer" onClick={() => handleDelete(index)} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                                <svg className="entries-delete h-5 w-5 text-red-500 cursor-pointer" onClick={() => handleDelete(index)} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                           
                                           </div>
                                           <p className="text-[#dbdbdb]">{item.date}</p>

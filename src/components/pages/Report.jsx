@@ -1,62 +1,96 @@
 import Home from "./Home";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useMemo } from "react";
 import { EntriesContext } from "../reuse/EntriesContext";
 
 const Report = () => {
-  const { entries } = useContext(EntriesContext); // ✅ use entries from context
-
+  const { entries } = useContext(EntriesContext);
   const [filter, setFilter] = useState("all");
   const [filteredReports, setFilteredReports] = useState([]);
 
-  // ✅ group entries by month (Income + Expenses)
-  const reports = entries.reduce((acc, e) => {
-    const d = new Date(e.date);
-    const monthKey = d.toLocaleString("default", { month: "short", year: "numeric" });
-    if (!acc[monthKey]) {
-      acc[monthKey] = { month: monthKey, income: 0, expenses: 0 };
-    }
-    if (e.type === "income") acc[monthKey].income += Number(e.amount);
-    if (e.type === "expense") acc[monthKey].expenses += Number(e.amount);
-    return acc;
-  }, {});
+  // Use useMemo to prevent recalculation on every render
+  const reportArr = useMemo(() => {
+    const reports = entries.reduce((acc, e) => {
+      const d = new Date(e.date);
+      const monthKey = d.toLocaleString("default", { month: "short", year: "numeric" });
+      if (!acc[monthKey]) {
+        acc[monthKey] = { month: monthKey, income: 0, expenses: 0 };
+      }
+      
+      // Fixed: Now properly checks for type field
+      if (e.type === "income") {
+        acc[monthKey].income += Number(e.amount);
+      }
+      if (e.type === "expense") {
+        acc[monthKey].expenses += Number(e.amount);
+      }
+      return acc;
+    }, {});
 
-  const reportArr = Object.values(reports).sort(
-    (a, b) => new Date(a.month) - new Date(b.month)
-  );
+    return Object.values(reports).sort(
+      (a, b) => new Date(a.month + " 1") - new Date(b.month + " 1")
+    );
+  }, [entries]);
 
   useEffect(() => {
-    if (!reportArr.length) return;
+    if (!entries.length) {
+      setFilteredReports([]);
+      return;
+    }
+    
     const today = new Date();
 
     if (filter === "month") {
-      setFilteredReports(
-        reportArr.filter(r => {
-          const [mon, year] = r.month.split(" ");
-          const d = new Date(`${mon} 1, ${year}`);
-          return d.getMonth() === today.getMonth() && d.getFullYear() === today.getFullYear();
-        })
-      );
+      const currentMonthEntries = entries.filter(e => {
+        const entryDate = new Date(e.date);
+        return entryDate.getMonth() === today.getMonth() && 
+               entryDate.getFullYear() === today.getFullYear();
+      });
+
+      const monthlyData = currentMonthEntries.reduce((acc, e) => {
+        const d = new Date(e.date);
+        const monthKey = d.toLocaleString("default", { month: "short", year: "numeric" });
+        if (!acc[monthKey]) {
+          acc[monthKey] = { month: monthKey, income: 0, expenses: 0 };
+        }
+        // Fixed: Now properly checks for type field
+        if (e.type === "income") acc[monthKey].income += Number(e.amount);
+        if (e.type === "expense") acc[monthKey].expenses += Number(e.amount);
+        return acc;
+      }, {});
+
+      setFilteredReports(Object.values(monthlyData));
+      
     } else if (filter === "15days") {
       const cutoff = new Date();
       cutoff.setDate(today.getDate() - 15);
-      setFilteredReports(
-        entries.filter(e => {
-          const d = new Date(e.date);
-          return d >= cutoff && d <= today;
-        }).map(e => ({
-          month: new Date(e.date).toLocaleString("default", { month: "short", year: "numeric" }),
-          income: e.type === "income" ? Number(e.amount) : 0,
-          expenses: e.type === "expense" ? Number(e.amount) : 0,
-        }))
-      );
+      
+      const last15DaysEntries = entries.filter(e => {
+        const entryDate = new Date(e.date);
+        return entryDate >= cutoff && entryDate <= today;
+      });
+
+      const monthlyData = last15DaysEntries.reduce((acc, e) => {
+        const d = new Date(e.date);
+        const monthKey = d.toLocaleString("default", { month: "short", year: "numeric" });
+        if (!acc[monthKey]) {
+          acc[monthKey] = { month: monthKey, income: 0, expenses: 0 };
+        }
+        // Fixed: Now properly checks for type field
+        if (e.type === "income") acc[monthKey].income += Number(e.amount);
+        if (e.type === "expense") acc[monthKey].expenses += Number(e.amount);
+        return acc;
+      }, {});
+
+      setFilteredReports(Object.values(monthlyData).sort(
+        (a, b) => new Date(a.month + " 1") - new Date(b.month + " 1")
+      ));
+      
     } else {
       setFilteredReports(reportArr);
     }
-
-
     
-    
-
+    console.log("All entries:", entries);
+    console.log("Filtered reports:", filteredReports);
   }, [filter, entries]);
 
   const totalIncome = filteredReports.reduce((s, r) => s + r.income, 0);
