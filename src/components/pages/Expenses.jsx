@@ -107,7 +107,7 @@ const Expenses = () => {
 
                   <div className="income-1 mt-3.5 sm:mt-0 data-panel w-full  bg-[#171717] rounded-3xl flex flex-col gap-2 text-white p-6">
                         <h2 className="text-gray-300 text-[29px]">Total Expenses</h2>
-                        <div className="text-[#ef000a] text-4xl">₹{entries.reduce((store,current) => store + Number(current.amount), 0)
+                        <div className="text-[#ef000a] text-4xl break-words break-all whitespace-normal">₹{entries.reduce((store,current) => store + Number(current.amount), 0)
                               .toLocaleString("en-IN" , {minimumFractionDigits : 2, maximumFractionDigits: 2})}</div>
                         <div className="text-gray-300 text-[15px]">{entries.length} entries this period</div>
                   </div>
@@ -187,7 +187,7 @@ const Expenses = () => {
 
                                           <div className="amount-div flex justify-between items-center">
                                                 <div className="flex justify-center items-center gap-2">
-                                                      <p className="text-[#ef000a] text-xl">₹{item.amount}</p> 
+                                                      <p className="text-[#ef000a] text-xl break-words break-all whitespace-normal">₹{Number(item.amount).toLocaleString("en-IN" , {minimumFractionDigits : 2, maximumFractionDigits: 2})}</p> 
                                                       <span className="bg-[#615959] rounded-3xl py-0.5 px-2.5">{item.catSelected}</span>
                                                       <span className="bg-[#5a5a5a] rounded-3xl py-0.5 px-2.5">{item.selected}</span>
                                                 </div>

@@ -132,24 +132,24 @@ const Employees = () => {
                          
                         <div className="main-em-1 flex flex-col sm:flex-row flex-wrap justify-center gap-4">
                               
-                              <div className="employee-1 flex-1 min-w-[250px] bg-[#171717] rounded-3xl flex flex-col text-white p-6 py-10">
+                              <div className="employee-1 data-panel flex-1 min-w-[250px] bg-[#171717] rounded-3xl flex flex-col text-white p-6 py-10">
                                     <h2 className="text-gray-300 text-[22px] sm:text-[29px]">Total Employees</h2>
-                                    <div className="text-[#7ba5ff] text-3xl sm:text-4xl">{AllEntries.length}</div>
-                                    <div className="text-gray-300 text-[14px] sm:text-[15px]">{AllEntries.filter(emp => emp.selectedStatus === "Active").length} active</div>
+                                    <div className="text-[#7ba5ff] text-3xl sm:text-4xl break-words break-all whitespace-normal">{AllEntries.length}</div>
+                                    <div className="text-gray-300 text-[14px] sm:text-[15px] break-words break-all whitespace-normal">{AllEntries.filter(emp => emp.selectedStatus === "Active").length} active</div>
                               </div>
 
-                              <div className="employee-1 flex-1 min-w-[250px] bg-[#171717] rounded-3xl flex flex-col text-white p-6 py-10">
+                              <div className="employee-1 data-panel flex-1 min-w-[250px] bg-[#171717] rounded-3xl flex flex-col text-white p-6 py-10">
                                     <h2 className="text-gray-300 text-[22px] sm:text-[29px]">Total Payroll</h2>
-                                    <div className="text-[#01a63e] text-3xl sm:text-4xl">
+                                    <div className="text-[#01a63e] text-3xl sm:text-4xl break-words break-all whitespace-normal">
                                           ₹{AllEntries.reduce((store,current) => store + Number(current.salaryEm), 0)
                                           .toLocaleString("en-IN" , {minimumFractionDigits : 2, maximumFractionDigits: 2})}
                                     </div>
                                     <div className="text-gray-300 text-[14px] sm:text-[15px]">Annual salaries</div>
                               </div>
 
-                              <div className="employee-1 flex-1 min-w-[250px] bg-[#171717] rounded-3xl flex flex-col text-white p-6 py-10">
-                                    <h2 className="text-gray-300 text-[22px] sm:text-[29px]">Avg. Salary</h2>
-                                    <div className="text-[#7cf8aa] text-3xl sm:text-4xl">
+                              <div className="employee-1 data-panel flex-1 min-w-[250px] bg-[#171717] rounded-3xl flex flex-col text-white p-6 py-10">
+                                    <h2 className="text-gray-300 text-[22px] sm:text-[29px] ">Avg. Salary</h2>
+                                    <div className="text-[#7cf8aa] text-3xl sm:text-4xl break-words break-all whitespace-normal">
                                           ₹{avgSalary.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                     </div>
                                     <div className="text-gray-300 text-[14px] sm:text-[15px]">Per employee</div>
@@ -273,19 +273,36 @@ const Employees = () => {
                                     </div>
 
                                     
-                                    <div className="detail-info flex flex-col sm:flex-row sm:justify-between gap-4">
-                                          <div className="flex flex-col gap-2">
-                                                <div className="div flex gap-1">{item.emailEm}</div>
-                                                <div className="div flex gap-1">{Number(item.salaryEm).toLocaleString("en-IN" , {minimumFractionDigits : 2, maximumFractionDigits: 2})} / year</div>
+                                    <div className="detail-info flex flex-col sm:flex-row sm:justify-between gap-6 sm:gap-12 lg:gap-20 w-full">
+                                          
+                                          <div className="flex flex-col gap-2 w-full sm:w-1/2">
+                                          <div className="flex items-center gap-2 break-all">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19 8.27q-1.038 0-1.77-.731t-.73-1.77T17.23 4T19 3.27t1.77.73t.73 1.77t-.73 1.769t-1.77.73M4.616 19q-.691 0-1.153-.462T3 17.384V6.616q0-.691.463-1.153T4.615 5h9.947q-.043.25-.053.49q-.009.24.014.51q.04.762.316 1.44q.274.677.734 1.221L12 11L4.308 6L4 6.885l8 5.23l4.314-2.819q.54.458 1.225.716q.684.257 1.461.257q.512 0 1.027-.125T21 9.77v7.616q0 .69-.462 1.152T19.385 19z"/></svg>
+                                                <span>{item.emailEm}</span>
                                           </div>
-                                          <div className="flex flex-col gap-2">
-                                                <div className="div flex gap-1">{item.phoneEm}</div>
-                                                <div className="div flex gap-1"><p className="me-1">Started:</p>{item.dateEm}</div>
+                                          <div className="flex items-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m13.406 19.854l-5.727-5.977q-.087-.086-.133-.197q-.046-.11-.046-.243v-.398q0-.278.188-.466t.466-.188H10.5q1.517 0 2.759-.959t1.268-2.734H7q-.213 0-.356-.144q-.144-.143-.144-.356t.144-.356T7 7.692h7.42q-.31-1.182-1.388-1.937T10.5 5H7q-.213 0-.356-.144T6.5 4.499t.144-.356T7 4h10q.213 0 .356.144t.144.357t-.144.356T17 5h-3.442q.715.425 1.24 1.146t.656 1.546H17q.213 0 .356.144t.144.357t-.144.356t-.356.143h-1.467q-.008 2.125-1.52 3.409q-1.511 1.284-3.513 1.284H8.602l5.523 5.761q.239.245.11.55q-.127.304-.468.304q-.105 0-.197-.036q-.091-.037-.164-.11"/></svg>
+                                                <span className="break-words break-all whitespace-normal">{Number(item.salaryEm).toLocaleString("en-IN" , {minimumFractionDigits : 2, maximumFractionDigits: 2})} / year</span>
+                                          </div>
+                                          </div>
+
+                                          
+                                          <div className="flex flex-col gap-2 w-full sm:w-1/2">
+                                          <div className="flex items-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18.93 20q-2.528 0-5.184-1.266t-4.944-3.555q-2.27-2.288-3.536-4.935T4 5.07q0-.45.3-.76T5.05 4h2.473q.408 0 .712.257t.411.659L9.142 7.3q.07.42-.025.733t-.333.513L6.59 10.592q.616 1.117 1.361 2.076t1.59 1.817q.87.87 1.874 1.62q1.004.749 2.204 1.414l2.139-2.177q.244-.263.549-.347q.304-.083.674-.033l2.103.43q.408.1.662.411t.254.712v2.435q0 .45-.31.75t-.76.3"/></svg>
+                                                <span>{item.phoneEm}</span>
+                                          </div>
+                                          <div className="flex items-center gap-2">
+                                                <p className="me-1 font-medium">Started:</p>
+                                                <span>{item.dateEm}</span>
+                                          </div>
                                           </div>
                                     </div>
 
+
                                     
                                     <div className="div flex w-full gap-1">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 20.556q-.235 0-.47-.077t-.432-.25q-1.067-.981-2.164-2.185q-1.096-1.203-1.99-2.493t-1.468-2.633t-.572-2.622q0-3.173 2.066-5.234Q9.037 3 12 3t5.03 2.062q2.066 2.061 2.066 5.234q0 1.279-.572 2.613q-.572 1.333-1.458 2.632q-.885 1.3-1.981 2.494T12.92 20.21q-.191.173-.434.26q-.244.086-.487.086m.004-8.825q.667 0 1.14-.476q.472-.475.472-1.143t-.476-1.14t-1.143-.472t-1.14.476t-.472 1.143t.475 1.14t1.144.472"/></svg>
                                           <textarea className="income-desc w-full text-[#f8f8f8] overflow-y-scroll border border-[#80808059] rounded-2xl outline-0 p-2" value={item.descEm} onChange={(e) => handleAddressChange(index, e.target.value)}></textarea>
                                     </div>
                               </div>

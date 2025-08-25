@@ -5,10 +5,12 @@ import Expenses from "./components/pages/Expenses"
 import Employees from "./components/pages/Employees"
 import Report from "./components/pages/Report"
 
+import { EntriesProvider } from "./components/reuse/EntriesContext"
+
 const App = () => {
   return (
+<EntriesProvider>
     <div>
-
        <Routes>
         <Route path="/" element={<Dashboard/>}></Route>
         <Route path="/income" element={<Income/>}></Route>
@@ -18,6 +20,7 @@ const App = () => {
       </Routes> 
 
     </div>
+</EntriesProvider>
   )
 }
 

@@ -1,6 +1,6 @@
 import Home from "./Home"
-import { useState } from "react";
-
+import { useState , useContext } from "react";
+import { EntriesContext } from "../reuse/EntriesContext";
 const Income = () => {
 
    //useState
@@ -16,7 +16,7 @@ const Income = () => {
             method: "",
             desc: ""
       })
-      let [entries , setEntries] = useState([]) 
+      const { entries, setEntries } = useContext(EntriesContext);
    //useState
 
       const options = [
@@ -82,7 +82,7 @@ const Income = () => {
 
                   <div className="income-1 mt-3.5 sm:mt-0 data-panel w-full  bg-[#171717] rounded-3xl flex flex-col gap-2 text-white p-6">
                         <h2 className="text-gray-300 text-[29px]">Total Income</h2>
-                        <div className="text-[#00a63e] text-4xl">₹{entries.reduce((store,current) => store + Number(current.amount), 0)
+                        <div className="text-[#00a63e] text-4xl break-words break-all whitespace-normal">₹{entries.reduce((store,current) => store + Number(current.amount), 0)
                               .toLocaleString("en-IN" , {minimumFractionDigits : 2, maximumFractionDigits: 2})}</div>
                         <div className="text-gray-300 text-[15px]">{entries.length} entries this period</div>
                   </div>
@@ -137,7 +137,7 @@ const Income = () => {
 
                                           <div className="amount-div flex justify-between items-center">
                                                 <div className="flex justify-center items-center gap-2">
-                                                      <p className="text-[#00a63e] text-xl">₹{item.amount}</p> 
+                                                      <p className="text-[#00a63e] text-xl break-words break-all whitespace-normal">₹{Number(item.amount).toLocaleString("en-IN" , {minimumFractionDigits : 2, maximumFractionDigits: 2})}</p> 
                                                       <span className="bg-[#5a5a5a] rounded-3xl py-0.5 px-2.5">{item.selected}</span>
                                                 </div>
 
@@ -155,7 +155,6 @@ const Income = () => {
 
             </div>
       </div>
-
   )
 }
 
